@@ -1,15 +1,19 @@
-const Box = x => ({
-    map: f => Box(f(x)),
-    fold: f => f(x),
-    inspect: () => `Box(${x})`
-})
+function Box(param) {
+    return {
+        map: function (fn) { return Box(fn(param)); },
+        fold: function (fn) { return fn(param) },
+        inspect: function () {
+            return `Box(${param})`;
+        }
+    }
+}
 
-const nextCharForNumberString = str =>
-    Box(str)
-    .map(s => s.trim())
-    .map(s => new Number(s))
-    .map(s => s + 1)
-    .map(s => String.fromCharCode(s))
-    .fold(s => s.toLowerCase())
+    const nextCharForNumberString = str =>
+        Box(str)
+            .map(s => s.trim())
+            .map(s => new Number(s))
+            .map(s => s + 1)
+            .map(s => String.fromCharCode(s))
+            .fold(s => s.toLowerCase());
 
-console.log(nextCharForNumberString('  64  '));
+    console.log(nextCharForNumberString('  64  '));
