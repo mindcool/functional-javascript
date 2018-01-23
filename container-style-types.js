@@ -1,8 +1,8 @@
 function Box(param) {
     return {
-        map: function (fn) { return Box(fn(param)); },
-        fold: function (fn) { return fn(param) },
-        inspect: function () {
+        map: f => Box(f(param)),
+        fold: f => f(param),
+        inspect: f => {
             return `Box(${param})`;
         }
     }
